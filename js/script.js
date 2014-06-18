@@ -2,7 +2,7 @@
 	var test ={
 		enteredLogin: '',
 		enteredPass: '',		
-		testName: 'Тест по верстке!',
+		testName: 'Тест по верстке!!!',
 		questionsList: [
 		{
 			question: 'Почему в браузере не отображается текст, расположенный между тегами &lt;!-- и --&gt;?',
