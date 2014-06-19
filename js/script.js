@@ -3,6 +3,7 @@
 		enteredLogin: '',
 		enteredPass: '',		
 		testName: 'Тест по верстке!',
+		userAnswers: [],
 		questionsList: [
 		{
 			question: 'Почему в браузере не отображается текст, расположенный между тегами &lt;!-- и --&gt;?',
@@ -343,17 +344,10 @@
 							flag = true;
 						} else {
 							flag = false;
-						};
-						if (this.questionsList[i].answerVariants[j].right){
-							checkboxes[j].parentNode.querySelector('span').className = 'rightAnswer';
-						};
+						};						
 					};
 
-					if (flag){
-						all[i].querySelector('p').className = 'right';
-					} else {
-						all[i].querySelector('p').className = 'wrong'
-					}
+					this.userAnswers.push(flag);					
 				};
 			};	
 			for (var i = 0; i < all.length - 1; i++) {
@@ -366,10 +360,25 @@
 		},
 		showRezults: function() {
 			var rezult = document.createElement('p'),
-				temp,
-				rightAnswNum = document.body.querySelectorAll('.right').length,
+				rightAnswNum,
 				quest = document.body.querySelectorAll('li');
 
+			for (var i = 0; i < quest.length; i++){
+				var check = quest[i].querySelectorAll('input');
+				for(var j = 0; j < check.length; j++){
+					if (this.questionsList[i].answerVariants[j].right){
+						check[j].parentNode.querySelector('span').className = 'rightAnswer';
+					};
+				};
+
+				if (this.userAnswers[i]){
+					quest[i].querySelector('p').className = 'right';
+				} else {
+					quest[i].querySelector('p').className = 'wrong'
+				}
+			};
+
+			rightAnswNum =  document.body.querySelectorAll('.right').length;
 			for (var i = 0; i < quest.length; i++) {
 				quest[i].className = 'visible';
 			};
